@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, SafeAreaView } from 'react-native';
 import AntCard from '../../components/AntCard';
 import { fetchAnts } from '../../services/api';
@@ -9,6 +9,7 @@ import {
   Container,
   LoadingContainer,
   RaceText,
+  RaceTextContainer,
   Title,
 } from './styles';
 import { type Ant } from './types';
@@ -35,6 +36,46 @@ export default function MainPage() {
       setLoadingAnts(false);
     }
   }, []);
+
+  function generateAntWinLikelihoodCalculator() {
+    const delay = 2000 + Math.random() * 7000;
+    const likelihoodOfAntWinning = Math.random();
+
+    return callback => {
+      setTimeout(() => {
+        callback(likelihoodOfAntWinning);
+      }, delay);
+    };
+  }
+
+  const startRace = useCallback(() => {
+    setRaceState('In progress');
+    const newAntsStatus: Ant[] = ants.map(ant => {
+      const newAnt = { ...ant };
+      newAnt.likelihood = 'In progress';
+      newAnt.chance = 0;
+      return newAnt;
+    });
+    setAnts(newAntsStatus);
+
+    ants.forEach((ant, index) => {
+      const calculator = generateAntWinLikelihoodCalculator();
+
+      calculator((chance: number) => {
+        const newAnts = [...newAntsStatus];
+        newAnts[index].likelihood = 'Calculated';
+        newAnts[index].chance = chance;
+        newAnts.sort((a, b) => b.chance - a.chance);
+        setAnts(newAnts);
+      });
+    });
+  }, [ants]);
+
+  useEffect(() => {
+    if (ants.length && ants.every(ant => ant.likelihood === 'Calculated')) {
+      setRaceState('All calculated');
+    }
+  }, [ants]);
 
   return (
     <>
@@ -64,12 +105,20 @@ export default function MainPage() {
         )}
         {!!ants.length && (
           <>
-            <RaceText>Race: {raceState}</RaceText>
+            <RaceTextContainer>
+              <RaceText>Race: {raceState}</RaceText>
+              {raceState === 'In progress' && (
+                <ActivityIndicator
+                  style={{ marginLeft: 12 }}
+                  size="small"
+                  color="#4f2d13"
+                />
+              )}
+            </RaceTextContainer>
             <Button
               onPress={() => {
-                // startRace();
+                startRace();
               }}
-              style={{ marginTop: 14 }}
               activeOpacity={0.6}
             >
               <ButtonText>Start Race</ButtonText>

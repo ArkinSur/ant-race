@@ -1,10 +1,5 @@
-import { Text, View } from 'react-native';
-import { type Ant } from '../../pages/MainPage/types';
 import { CardText, Container } from './styles';
-
-interface Props {
-  ant: Ant;
-}
+import { type Props } from './types';
 
 export default function AntCard({ ant }: Props) {
   const { name, color, weight, length, likelihood } = ant;
@@ -16,7 +11,7 @@ export default function AntCard({ ant }: Props) {
       <CardText>Length: {length}</CardText>
       <CardText>Likelihood: {likelihood}</CardText>
       {!!ant?.chance && (
-        <CardText>Chance: {(ant.chance * 100).toFixed(0)}%</CardText>
+        <CardText>Chance: {(ant.chance * 100).toFixed(1)}%</CardText>
       )}
     </Container>
   );

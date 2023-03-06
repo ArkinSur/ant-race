@@ -44,6 +44,11 @@ export const CardsContainer = styled.View`
   margin-bottom: 20px;
 `;
 
+export const RaceTextContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
 export const RaceText = styled.Text`
   margin: 20px 0 20px 0;
   color: #4f2d13;
