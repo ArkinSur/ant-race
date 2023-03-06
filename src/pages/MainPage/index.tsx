@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { ActivityIndicator, SafeAreaView, View } from 'react-native';
+import { ActivityIndicator, SafeAreaView } from 'react-native';
 import AntCard from '../../components/AntCard';
 import { fetchAnts } from '../../services/api';
 import {
@@ -62,16 +62,20 @@ export default function MainPage() {
             })}
           </CardsContainer>
         )}
-        <RaceText>Race: {raceState}</RaceText>
-        <Button
-          onPress={() => {
-            // startRace();
-          }}
-          style={{ marginTop: 14 }}
-          activeOpacity={0.6}
-        >
-          <ButtonText>Start Race</ButtonText>
-        </Button>
+        {!!ants.length && (
+          <>
+            <RaceText>Race: {raceState}</RaceText>
+            <Button
+              onPress={() => {
+                // startRace();
+              }}
+              style={{ marginTop: 14 }}
+              activeOpacity={0.6}
+            >
+              <ButtonText>Start Race</ButtonText>
+            </Button>
+          </>
+        )}
       </Container>
     </>
   );
