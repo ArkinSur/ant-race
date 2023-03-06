@@ -6,17 +6,24 @@ export const Container = styled.ScrollView.attrs({
     paddingBottom: 40,
   },
 })`
-  background-color: #fff;
+  background-color: #fff266;
   padding: 20px 0 20px 0;
+`;
+
+export const Title = styled.Text`
+  font-size: 26px;
+  font-weight: bold;
+  color: #4f2d13;
 `;
 
 export const Button = styled.TouchableOpacity`
   height: 50px;
   width: 70%;
   border-radius: 8px;
-  background-color: blue;
+  background-color: #4f2d13;
   justify-content: center;
   align-items: center;
+  margin: 20px 0 20px 0;
 `;
 
 export const ButtonText = styled.Text`
@@ -25,7 +32,7 @@ export const ButtonText = styled.Text`
 `;
 
 export const LoadingContainer = styled.View`
-  height: 100px;
+  height: 120px;
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -35,4 +42,11 @@ export const LoadingContainer = styled.View`
 export const CardsContainer = styled.View`
   width: 100%;
   margin-bottom: 20px;
+`;
+
+export const RaceText = styled.Text`
+  margin: 20px 0 20px 0;
+  color: #4f2d13;
+  font-weight: 600;
+  font-size: 18px;
 `;

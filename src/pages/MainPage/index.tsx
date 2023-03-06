@@ -8,12 +8,15 @@ import {
   CardsContainer,
   Container,
   LoadingContainer,
+  RaceText,
+  Title,
 } from './styles';
 import { type Ant } from './types';
 
 export default function MainPage() {
   const [loadingAnts, setLoadingAnts] = useState(false);
   const [ants, setAnts] = useState<Ant[]>([]);
+  const [raceState, setRaceState] = useState('Not yet run');
 
   const getAnts = useCallback(async () => {
     try {
@@ -37,17 +40,8 @@ export default function MainPage() {
     <>
       <SafeAreaView />
       <Container>
-        {loadingAnts ? (
-          <LoadingContainer>
-            <ActivityIndicator size="large" color="blue" />
-          </LoadingContainer>
-        ) : (
-          <CardsContainer>
-            {ants.map(ant => {
-              return <AntCard key={ant.name} ant={ant} />;
-            })}
-          </CardsContainer>
-        )}
+        <Title>Ant Race</Title>
+
         <Button
           onPress={() => {
             getAnts();
@@ -56,6 +50,19 @@ export default function MainPage() {
         >
           <ButtonText>Get Ants</ButtonText>
         </Button>
+
+        {loadingAnts ? (
+          <LoadingContainer>
+            <ActivityIndicator size="large" color="#4f2d13" />
+          </LoadingContainer>
+        ) : (
+          <CardsContainer>
+            {ants.map(ant => {
+              return <AntCard key={ant.name} ant={ant} />;
+            })}
+          </CardsContainer>
+        )}
+        <RaceText>Race: {raceState}</RaceText>
         <Button
           onPress={() => {
             // startRace();
