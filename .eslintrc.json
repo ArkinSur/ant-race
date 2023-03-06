@@ -1,0 +1,58 @@
+{
+    "env": {
+      "es2021": true
+    },
+    "extends": [
+      "plugin:react/recommended",
+      "standard-with-typescript",
+      "plugin:prettier/recommended"
+    ],
+    "overrides": [],
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module",
+      "project": ["./tsconfig.json"]
+    },
+    "plugins": ["react", "react-hooks", "prettier", "import-helpers"],
+    "rules": {
+      "prettier/prettier": "error",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [".tsx"]
+        }
+      ],
+      "no-use-before-define": "off",
+      "@typescript-eslint/no-use-before-define": ["error"],
+      "@typescript-eslint/no-unused-vars": "warn",
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/strict-boolean-expressions": "off",
+      "@typescript-eslint/no-floating-promises": "off",
+      "react/react-in-jsx-scope": "off",
+      "import-helpers/order-imports": [
+        "error",
+        {
+          "newlinesBetween": "ignore",
+          "groups": [
+            "/^expo/",
+            "/^react/",
+            "module",
+            "/^components/",
+            "/^config/",
+            "/^contexts/",
+            "/^hooks/",
+            "/^modules/",
+            "/^navigation/",
+            "/^services/",
+            "/^utils/",
+            ["parent", "sibling", "index"]
+          ],
+          "alphabetize": { "order": "asc", "ignoreCase": false }
+        }
+      ],
+      "react/prop-types": "off"
+    }
+  }
+  
